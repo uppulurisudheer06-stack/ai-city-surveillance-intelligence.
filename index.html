@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI City Surveillance Intelligence Platform</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{font-family:Segoe UI,Arial,sans-serif;background:#f3f7fc;color:#14233d;line-height:1.65}
+a{text-decoration:none;color:inherit}
+.wrap{width:min(1150px,92%);margin:auto}
+header{background:#071426;color:white;position:sticky;top:0;z-index:5;border-bottom:1px solid #25435f}
+nav{min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap;padding:12px 0}
+.brand{font-size:18px;font-weight:800}
+.brand span{color:#39d7f2;margin-right:8px;font-size:24px}
+.links{display:flex;gap:17px;flex-wrap:wrap;font-size:13px;color:#d6e4f4}
+.links a:hover{color:#39d7f2}
+.github{background:#168cff;padding:8px 12px;border-radius:8px;color:white!important}
+.hero{background:radial-gradient(ellipse at 80% 20%,#155678,transparent 40%),linear-gradient(120deg,#071426,#102b4a);color:white}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:35px;padding:75px 0}
+.tag{display:inline-block;padding:6px 12px;border:1px solid #3d7899;border-radius:30px;background:#10334d;color:#a9f1ff;font-size:11px;font-weight:bold;letter-spacing:1px}
+h1{font-size:clamp(38px,5vw,61px);line-height:1.1;margin:20px 0;letter-spacing:-1.5px}
+.gradient{color:#38c8f5}
+.hero p{color:#d0deee;font-size:17px;max-width:580px}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.btn{display:inline-block;padding:12px 18px;border-radius:10px;font-weight:bold;font-size:14px}
+.primary{background:linear-gradient(100deg,#168cff,#24c9e6);color:#06172a}
+.outline{border:1px solid #6688a7;color:white}
+.visual{height:310px;position:relative;overflow:hidden;border:1px solid #39708e;border-radius:22px;background:linear-gradient(#153c59,#071426);padding:18px;box-shadow:0 20px 50px #0004}
+.hud{display:flex;justify-content:space-between;color:#b8eaff;font-size:11px}
+.skyline{position:absolute;bottom:0;left:0;right:0;height:72%;display:flex;align-items:flex-end;gap:7px;padding:0 18px}
+.building{flex:1;border:1px solid #246080;background:linear-gradient(#174365,#081a2b);position:relative}
+.building:after{content:"";position:absolute;inset:8px 4px;background:repeating-linear-gradient(0deg,transparent 0 12px,#36c8f0 13px 15px);opacity:.45}
+.road{position:absolute;bottom:0;left:30%;width:43%;height:43%;background:linear-gradient(90deg,#0b1724,#24384b,#0b1724);clip-path:polygon(42% 0,58% 0,100% 100%,0 100%)}
+.scan{position:absolute;z-index:2;border:2px solid #30e6a1;width:24%;height:26%;left:12%;top:40%}
+.scan:before{content:"VEHICLE";position:absolute;top:-23px;left:-2px;background:#30e6a1;color:#071426;font-size:10px;font-weight:bold;padding:2px 6px}
+.scan.two{left:42%;top:48%;border-color:#39a7ff}
+.scan.two:before{content:"EMERGENCY VEHICLE";background:#39a7ff}
+.scan.three{left:auto;right:9%;top:23%;border-color:#ff6479}
+.scan.three:before{content:"FIRE / SMOKE";background:#ff6479;color:white}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:20px 0}
+.stat{background:white;border:1px solid #dce7f2;border-radius:13px;padding:16px;display:flex;gap:12px;align-items:center}
+.icon{width:43px;height:43px;flex-shrink:0;display:grid;place-items:center;background:#e4f2ff;border-radius:12px;font-size:22px}
+.stat h3{font-size:14px}.stat p{font-size:12px;color:#60718a}
+section{padding:65px 0}
+.soft{background:#eaf2fa}
+.kicker{color:#087ed4;font-size:11px;font-weight:bold;letter-spacing:1.5px;text-transform:uppercase}
+h2{font-size:clamp(27px,3vw,36px);line-height:1.2;margin:9px 0 13px}
+.intro{color:#60718a;max-width:760px}
+.about{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:stretch}
+.problem{margin-top:20px;padding:20px;border:1px solid #cfe5ff;border-radius:14px;background:#edf7ff}
+.problem h3{color:#086fca;margin-bottom:6px}
+.artbox{border-radius:20px;min-height:260px;background:linear-gradient(145deg,#173b5a,#071426);padding:25px;color:white;position:relative;overflow:hidden}
+.artbox:after{content:"";position:absolute;inset:20px;background:linear-gradient(90deg,transparent 49%,#5cd8ff40 50%,transparent 51%),linear-gradient(transparent 49%,#5cd8ff40 50%,transparent 51%);background-size:40px 40px}
+.artbox>*{position:relative;z-index:1}
+.preview{margin-top:28px;border:2px solid #35e2a4;width:70%;padding:12px;border-radius:8px;background:#061426cc}
+.preview span{display:block;color:#8af7d0;font-size:12px}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:25px}
+.card{background:white;border:1px solid #dce7f2;border-radius:15px;padding:22px;box-shadow:0 6px 20px #102a4609;transition:.2s}
+.card:hover{transform:translateY(-4px);box-shadow:0 13px 28px #102a4618}
+.card-icon{width:48px;height:48px;border-radius:13px;background:#e8f4ff;display:grid;place-items:center;font-size:23px;margin-bottom:14px}
+.green{background:#e4fbf0}.orange{background:#fff2df}.purple{background:#f1eaff}
+.card h3{font-size:17px;margin-bottom:7px}.card p{font-size:14px;color:#60718a}
+.workflow{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:25px}
+.step{background:white;border:1px solid #dce7f2;border-radius:13px;padding:16px 11px;text-align:center}
+.number{width:30px;height:30px;border-radius:50%;background:#168cff;color:white;display:grid;place-items:center;margin:0 auto 10px;font-weight:bold}
+.step h3{font-size:13px;margin-bottom:5px}.step p{font-size:12px;color:#60718a}
+.techs{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:22px}
+.tech{background:white;border:1px solid #dce7f2;border-radius:14px;padding:20px;text-align:center}
+.tech strong{display:block;margin:7px}.tech p{font-size:12px;color:#60718a}
+.results{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:25px}
+.result{background:white;border:1px solid #dce7f2;border-radius:15px;overflow:hidden}
+.result-image{height:135px;background:linear-gradient(135deg,#0b2038,#17617a);display:grid;place-items:center;color:#b7efff;font-size:42px;position:relative}
+.result-image:after{content:"";position:absolute;inset:17px;border:1px solid #56caff65;border-radius:8px}
+.result-text{padding:17px}.result-text p{font-size:13px;color:#60718a}
+.note{margin-top:18px;padding:15px;background:#fff6df;border:1px solid #f3dfa5;border-radius:10px;color:#775719;font-size:13px}
+.bottom{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+.team{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:18px}
+.member{display:flex;align-items:center;gap:10px;padding:13px;background:white;border:1px solid #dce7f2;border-radius:12px}
+.avatar{width:40px;height:40px;border-radius:50%;background:#dceeff;color:#087bd0;display:grid;place-items:center;font-weight:bold;flex-shrink:0}
+.member h3{font-size:14px}.member p{font-size:11px;color:#60718a;overflow-wrap:anywhere}
+.references{padding-left:20px;color:#60718a;font-size:14px}.references li{margin:8px 0}
+.repo{margin-top:20px;padding:22px;border-radius:15px;background:#0c2039;color:white}
+.repo p{font-size:13px;color:#c5d5e6;margin:8px 0 15px}
+footer{background:#071426;color:#d0deee;padding:25px 0;font-size:12px}
+.footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+@media(max-width:950px){.hero-grid,.about,.bottom{grid-template-columns:1fr}.cards{grid-template-columns:repeat(2,1fr)}.workflow{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:650px){nav{align-items:flex-start}.links{gap:10px}.stats{grid-template-columns:repeat(2,1fr)}.cards,.techs,.results,.bottom{grid-template-columns:1fr}.workflow{grid-template-columns:repeat(2,1fr)}.team{grid-template-columns:1fr}.hero-grid{padding:48px 0}section{padding:45px 0}}
+</style>
+</head>
+<body>
+<header><nav class="wrap">
+<a class="brand" href="#home"><span>◈</span> AI City Surveillance</a>
+<div class="links">
+<a href="#home">Home</a><a href="#about">About</a><a href="#objectives">Objectives</a><a href="#methodology">Methodology</a><a href="#results">Results</a><a href="#team">Team</a><a href="#references">References</a><a class="github" href="#repository">GitHub</a>
+</div></nav></header>
+<main id="home">
+<section class="hero" style="padding:0"><div class="wrap hero-grid">
+<div><span class="tag">ARTIFICIAL INTELLIGENCE · COMPUTER VISION</span>
+<h1>AI City Surveillance <span class="gradient">Intelligence Platform</span></h1>
+<p>An AI-based project exploring automated analysis of city surveillance images and videos to identify important visual events, including emergency vehicles, fire and smoke.</p>
+<div class="actions"><a class="btn primary" href="#about">▶ Explore Project</a><a class="btn outline" href="#methodology">◎ View Methodology</a></div></div>
+<div class="visual"><div class="hud"><span>CAM 04 / CITY CENTRE</span><span>● MONITOR VIEW</span></div>
+<div class="skyline"><div class="building" style="height:53%"></div><div class="building" style="height:82%"></div><div class="building" style="height:63%"></div><div class="building" style="height:95%"></div><div class="building" style="height:70%"></div><div class="building" style="height:88%"></div><div class="building" style="height:58%"></div><div class="building" style="height:76%"></div></div><div class="road"></div><div class="scan"></div><div class="scan two"></div><div class="scan three"></div></div>
+</div></section>
+<div class="strip"><div class="wrap stats">
+<div class="stat"><div class="icon">🚘</div><div><h3>Object Detection</h3><p>Images and videos</p></div></div>
+<div class="stat"><div class="icon" style="background:#ffe9ed">🚑</div><div><h3>Emergency Vehicles</h3><p>Selected vehicle classes</p></div></div>
+<div class="stat"><div class="icon" style="background:#fff0dc">♨</div><div><h3>Fire and Smoke</h3><p>Dedicated trained model</p></div></div>
+<div class="stat"><div class="icon" style="background:#e9e5ff">▥</div><div><h3>Visual Results</h3><p>Interactive application</p></div></div>
+</div></div>
+<section id="about"><div class="wrap about">
+<div><span class="kicker">01 / Project Overview</span><h2>Introduction</h2><p class="intro">Urban environments generate large amounts of visual information. Manually monitoring every camera feed can be time-consuming. This project explores how computer vision and deep learning can support the analysis of city surveillance images and videos.</p>
+<div class="problem"><h3>◎ Problem Statement</h3><p>To develop an application that uses object detection models to analyse visual input and identify selected events, helping users review surveillance content more efficiently.</p></div></div>
+<div class="artbox"><span class="tag">VISION SYSTEM / OVERVIEW</span><h3 style="font-size:26px;margin-top:20px">From visual input<br>to useful detections</h3><div class="preview"><b>Detection preview</b><span>● Object region identified</span><span>● Model output review</span></div></div>
+</div></section>
+<section class="soft" id="objectives"><div class="wrap"><span class="kicker">02 / Project Direction</span><h2>Objectives and Scope</h2><p class="intro">The platform brings selected computer-vision tasks into one interface. Results should be validated using real test samples.</p>
+<div class="cards">
+<div class="card"><div class="card-icon">🚘</div><h3>Object Detection</h3><p>Apply a YOLO-based model to supported images and videos.</p></div>
+<div class="card"><div class="card-icon green">🚑</div><h3>Emergency Vehicles</h3><p>Explore automated detection of emergency vehicles.</p></div>
+<div class="card"><div class="card-icon orange">♨</div><h3>Fire and Smoke</h3><p>Use a trained model to identify fire and smoke in visual inputs.</p></div>
+<div class="card"><div class="card-icon purple">▥</div><h3>Visual Results</h3><p>Display detection results through an interactive interface.</p></div>
+</div></div></section>
+<section id="methodology"><div class="wrap"><span class="kicker">03 / Technical Approach</span><h2>Methodology</h2><p class="intro">The workflow covers data preparation, model use, application integration and evaluation.</p>
+<div class="workflow">
+<div class="step"><div class="number">1</div><h3>Dataset</h3><p>Select relevant image and video data.</p></div>
+<div class="step"><div class="number">2</div><h3>Preprocessing</h3><p>Prepare images and annotations.</p></div>
+<div class="step"><div class="number">3</div><h3>Model</h3><p>Use YOLO-based object detection.</p></div>
+<div class="step"><div class="number">4</div><h3>Training & Validation</h3><p>Load trained weights and test on data.</p></div>
+<div class="step"><div class="number">5</div><h3>Integration</h3><p>Connect models to Streamlit and OpenCV.</p></div>
+<div class="step"><div class="number">6</div><h3>Evaluation</h3><p>Review detections and calculate metrics.</p></div>
+</div></div></section>
+<section class="soft" id="technology"><div class="wrap"><span class="kicker">04 / Technology Stack</span><h2>Tools and Technologies</h2><div class="techs">
+<div class="tech"><div style="font-size:30px">🐍</div><strong>Python</strong><p>Core programming language</p></div>
+<div class="tech"><div style="font-size:30px">◉</div><strong>YOLO</strong><p>Object detection framework</p></div>
+<div class="tech"><div style="font-size:30px">🖼</div><strong>OpenCV</strong><p>Image and video processing</p></div>
+<div class="tech"><div style="font-size:30px">▤</div><strong>Streamlit</strong><p>Interactive application interface</p></div>
+</div></div></section>
+<section id="results"><div class="wrap"><span class="kicker">05 / Testing and Evidence</span><h2>Results and Discussion</h2><p class="intro">Replace these preview cards with screenshots captured from your actual running application.</p>
+<div class="results">
+<div class="result"><div class="result-image">▧</div><div class="result-text"><h3>Object Detection</h3><p>Add a screenshot showing a real detection result.</p></div></div>
+<div class="result"><div class="result-image">🚑</div><div class="result-text"><h3>Emergency Vehicle</h3><p>Add a verified screenshot from the emergency-vehicle module.</p></div></div>
+<div class="result"><div class="result-image">♨</div><div class="result-text"><h3>Fire and Smoke</h3><p>Add a verified screenshot showing fire or smoke predictions.</p></div></div>
+</div><div class="note"><b>Evaluation note:</b> Add the dataset name, number of test samples, precision, recall, mAP and inference time only after measuring them. Do not invent performance scores.</div></div></section>
+<section class="soft"><div class="wrap bottom">
+<div><span class="kicker">06 / Summary</span><h2>Conclusion and Future Work</h2><p class="intro">This project demonstrates an application of computer vision for selected city-surveillance tasks. Future work may include broader testing, improved detection performance, and evaluation under different lighting and environmental conditions.</p></div>
+<div id="team"><span class="kicker">07 / Contributors</span><h2>Project Team</h2><div class="team">
+<div class="member"><div class="avatar">S</div><div><h3>Sudheer</h3><p>CB.AI.U4AID25165</p></div></div>
+<div class="member"><div class="avatar">V</div><div><h3>Venkat</h3><p>CB.AI.U425159</p></div></div>
+<div class="member"><div class="avatar">A</div><div><h3>Abishek</h3><p>CB.AI.U4AID25101</p></div></div>
+<div class="member"><div class="avatar">S</div><div><h3>Sanmukh Sai</h3><p>CB.AI.U4AID25161</p></div></div>
+</div></div></div></section>
+<section id="references"><div class="wrap bottom"><div><span class="kicker">08 / Sources</span><h2>References</h2><ul class="references"><li>Add the research papers used in the project.</li><li>Add the actual dataset sources.</li><li>Add official documentation for YOLO, OpenCV, Python and Streamlit.</li></ul></div>
+<div class="repo" id="repository"><span class="kicker" style="color:#73dcff">PROJECT SOURCE</span><h2>Explore the code</h2><p>After creating your GitHub repository, replace this button link with your actual repository URL.</p><a class="btn primary" href="https://github.com/" target="_blank" rel="noopener">◉ GitHub Repository</a></div>
+</div></section>
+</main>
+<footer><div class="wrap footer"><span><b>AI City Surveillance Intelligence Platform</b> · Academic Project · 2026</span><span>Artificial Intelligence | Computer Vision | Smart Cities</span></div></footer>
+</body>
+</html>
